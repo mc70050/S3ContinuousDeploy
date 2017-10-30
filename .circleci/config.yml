@@ -1,8 +1,12 @@
-dependencies:
-    override:
-        - sudo pip install awscli
-deployment:
-  prod:
-    branch: master
-    commands:
-      - aws s3 sync /home/ubuntu/S3ContinuousDeploy s3://aws-continue-deploy-lab --delete
+version: 2
+  jobs:
+    build:
+      - run:
+          name: install
+          command: sudo pip install awscli
+    steps:
+      - deploy:
+              prod:
+                 branch: master
+                 commands:
+                         - aws s3 sync /home/ubuntu/S3ContinuousDeploy s3://aws-continue-deploy-lab --delete      
